@@ -1,0 +1,7 @@
+<odoo>
+    <record id="payment_provider_slip2go" model="payment.provider">
+        <field name="name">Slip2Go</field>
+        <field name="code">slip2go</field>
+        <field name="state">test</field>
+    </record>
+</odoo>

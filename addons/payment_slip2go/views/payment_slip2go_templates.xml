@@ -1,0 +1,11 @@
+<odoo>
+    <template id="payment_slip2go_payment" inherit_id="payment.payment_form">
+        <xpath expr="//div[@id='payment_method']" position="inside">
+            <t t-if="acquirer.provider == 'slip2go'">
+                <div class="alert alert-info">
+                    Pay with Slip2Go (QR PromptPay supported)
+                </div>
+            </t>
+        </xpath>
+    </template>
+</odoo>

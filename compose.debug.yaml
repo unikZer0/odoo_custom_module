@@ -1,0 +1,6 @@
+services:
+  odoocusmodule:
+    image: odoocusmodule
+    build:
+      context: .
+      dockerfile: ./Dockerfile
