@@ -1,0 +1,50 @@
+<odoo>
+<!-- Action + Menu -->
+<record id="action_book_book" model="ir.actions.act_window">
+    <field name="name">Books</field>
+    <field name="res_model">book.book</field>
+    <field name="view_mode">tree,form</field>
+</record>
+
+
+<menuitem id="menu_odoobook_root" name="Odoo Book"/>
+<menuitem id="menu_odoobook_books" name="Books" parent="menu_odoobook_root" action="action_book_book"/>
+
+
+<!-- Tree View -->
+<record id="view_book_tree" model="ir.ui.view">
+    <field name="name">book.book.tree</field>
+    <field name="model">book.book</field>
+    <field name="arch" type="xml">
+    <tree>
+        <field name="name"/>
+        <field name="author"/>
+        <field name="date_release"/>
+    </tree>
+</field>
+</record>
+
+
+<!-- Form View -->
+<record id="view_book_form" model="ir.ui.view">
+    <field name="name">book.book.form</field>
+    <field name="model">book.book</field>
+    <field name="arch" type="xml">
+    <form>
+        <sheet>
+            <group>
+                <field name="name"/>
+                <field name="author"/>
+                <field name="date_release"/>
+                <field name="isbn"/>
+            </group>
+            <group>
+                <field name="description"/>
+            </group>
+        </sheet>
+    </form>
+    </field>
+</record>
+
+
+</odoo>
