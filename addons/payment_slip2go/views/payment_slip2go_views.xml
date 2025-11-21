@@ -1,18 +1,15 @@
+
 <odoo>
-    <record id="view_payment_provider_slip2go_form" model="ir.ui.view">
-        <field name="name">payment.provider.form.slip2go</field>
-        <field name="model">payment.provider</field>
-        <field name="inherit_id" ref="payment.payment_provider_form"/>
+    <record id="view_slip2go_transaction_tree" model="ir.ui.view">
+        <field name="name">slip2go.transaction.tree</field>
+        <field name="model">slip2go.transaction</field>
         <field name="arch" type="xml">
-            <xpath expr="//sheet" position="inside">
-                <group string="Slip2Go Configuration" invisible="code != 'slip2go'">
-                    <field name="slip2go_api_key"/>
-                    <field name="slip2go_api_secret"/>
-                    <field name="slip2go_bank_code"/>
-                    <field name="enable_promptpay"/>
-                    <field name="promptpay_number"/>
-                </group>
-            </xpath>
+            <tree>
+                <field name="name"/>
+                <field name="invoice_id"/>
+                <field name="state"/>
+                <field name="verified_at"/>
+            </tree>
         </field>
     </record>
 </odoo>

@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_slip2go_transaction_user,access.slip2go.transaction.user,model_slip2go_transaction,account.group_account_user,1,1,1,1
+access_slip2go_transaction_portal,access.slip2go.transaction.portal,model_slip2go_transaction,base.group_portal,1,0,0,0
+

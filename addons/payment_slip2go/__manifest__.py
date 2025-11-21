@@ -1,22 +1,22 @@
 {
-    'name': 'Slip2Go Payment Acquirer',
-    'version': '1.0',
-    'summary': 'Payment Integration with Slip2Go including QR PromptPay',
-    'author': 'You',
-    'depends': [
-        'base',
-        'payment',
-        'account',
-        'portal',
-        'website',
+    "name": "Payment Slip2Go",
+    "version": "1.0.0",
+    "category": "Accounting",
+    "summary": "Slip2Go payment provider",
+    "license": "LGPL-3",
+    "depends": ["base", "payment", "account", "website", "portal"],
+    "data": [
+        "security/ir.model.access.csv",
+        "data/ir_sequence_data.xml",
+        "data/payment_slip2go_provider_data.xml",
+        "views/payment_slip2go_provider_views.xml",
+        "views/payment_slip2go_templates.xml",
     ],
-    'data': [
-        'data/payment_provider_data.xml',
-        'views/payment_slip2go_views.xml',
-        # 'views/payment_slip2go_templates.xml',  # Commented out - template ID needs to be fixed for Odoo 17
-    ],
-    'installable': True,
-    'application': False,
-    'license': 'LGPL-3',
+    "assets": {
+        "website.assets_frontend": [
+            "payment_slip2go/static/src/js/scan_and_post.js",
+        ],
+    },
+    "installable": True,
+    "application": False,
 }
-

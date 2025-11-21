@@ -1,0 +1,21 @@
+<odoo>
+    <record id="provider_form_slip2go" model="ir.ui.view">
+        <field name="name">payment.provider.form.slip2go</field>
+        <field name="model">payment.provider</field>
+        <field name="inherit_id" ref="payment.payment_provider_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//sheet/notebook" position="inside">
+                <page string="Slip2Go" invisible="code != 'slip2go'">
+                    <group>
+                        <field name="slip2go_api_url"/>
+                        <field name="slip2go_secret" password="True"/>
+                    </group>
+                    <group>
+                        <field name="slip2go_promptpay_id"/>
+                        <field name="slip2go_bank_account"/>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

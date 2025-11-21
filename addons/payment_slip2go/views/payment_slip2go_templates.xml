@@ -1,9 +1,85 @@
+
 <odoo>
-    <template id="payment_slip2go_payment" inherit_id="payment.payment_form">
-        <xpath expr="//div[@id='payment_method']" position="inside">
-            <t t-if="acquirer.provider == 'slip2go'">
-                <div class="alert alert-info">
-                    Pay with Slip2Go (QR PromptPay supported)
+    <template id="payment_page" name="Slip2Go Payment Page">
+        <t t-call="website.layout">
+            <div class="container py-5">
+                <div class="card shadow-sm" id="slip2go-payment"
+                     t-att-data-invoice-id="invoice.id"
+                     t-att-data-transaction-id="transaction.id if transaction else False"
+                     t-att-data-access-token="access_token or ''"
+                     data-verify-url="/payment/slip2go/verify"
+                     t-att-data-qr-payload="qr_payload">
+                    <div class="card-header bg-primary text-white">
+                        <h3 class="mb-0">PromptPay / Slip2Go</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6 text-center">
+                                <img class="img-fluid border rounded p-2 mb-3"
+                                     t-att-alt="'PromptPay QR for %s' % invoice.name"
+                                     t-att-src="'data:image/png;base64,' + qr_base64"/>
+                                <p class="text-muted mb-0">
+                                    <strong t-esc="provider.slip2go_bank_account or provider.name"/>
+                                </p>
+                                <small class="text-muted">
+                                    PromptPay ID:
+                                    <t t-esc="provider.slip2go_promptpay_id or '—'"/>
+                                </small>
+                            </div>
+                            <div class="col-md-6">
+                                <h5>
+                                    Invoice <t t-esc="invoice.name"/>
+                                </h5>
+                                <p class="fs-5 mb-4">
+                                    <t t-esc="invoice.amount_residual"/>
+                                    <t t-esc="invoice.currency_id.symbol"/>
+                                </p>
+                                <div class="alert alert-info">
+                                    1) สแกน QR<br/>
+                                    2) โอนให้เรียบร้อย<br/>
+                                    3) กด Verify เพื่อให้ Slip2Go ตรวจสอบ
+                                </div>
+                                <div class="mb-3 d-none">
+                                    <label class="form-label">QR Payload</label>
+                                    <textarea class="form-control" rows="3"
+                                              data-role="slip2go-qr"
+                                              t-esc="qr_payload"/>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Upload Bank Slip (optional)</label>
+                                    <input type="file" accept="image/*" class="form-control"
+                                           data-role="slip2go-file"/>
+                                    <small class="text-muted">JPEG/PNG ≤ 5MB</small>
+                                </div>
+                                <button type="button" class="btn btn-success" data-role="slip2go-verify">
+                                    Verify with Slip2Go
+                                </button>
+                                <div class="mt-3" data-role="slip2go-result"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <script src="/payment_slip2go/static/src/js/scan_and_post.js"></script>
+        </t>
+    </template>
+
+    <template id="portal_invoice_slip2go_button" inherit_id="account.portal_invoice_page">
+        <xpath expr="//div[contains(@class, 'o_download_pdf')]" position="after">
+            <t t-if="invoice.state == 'posted' and invoice.amount_residual > 0">
+                <div class="flex-grow-1">
+                    <t t-if="access_token">
+                        <a class="btn btn-primary d-block"
+                           t-attf-href="/payment/slip2go/pay/{{ invoice.id }}?access_token={{ access_token }}">
+                            Pay with Slip2Go
+                        </a>
+                    </t>
+                    <t t-else="">
+                        <a class="btn btn-primary d-block"
+                           t-attf-href="/payment/slip2go/pay/{{ invoice.id }}">
+                            Pay with Slip2Go
+                        </a>
+                    </t>
                 </div>
             </t>
         </xpath>

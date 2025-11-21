@@ -1,0 +1,10 @@
+<odoo noupdate="1">
+    <record id="seq_slip2go_transaction" model="ir.sequence">
+        <field name="name">Slip2Go Transaction</field>
+        <field name="code">slip2go.tx</field>
+        <field name="prefix">S2G%(y)s%(month)s-</field>
+        <field name="padding">4</field>
+        <field name="company_id" ref="base.main_company"/>
+    </record>
+</odoo>
+

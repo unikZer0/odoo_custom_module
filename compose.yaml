@@ -9,11 +9,12 @@ services:
       - "8069:8069"
       - "8072:8072"
     volumes:
-      - web-custom:/var/lib/odoo
+      - web-odoo:/var/lib/odoo
       - ./config:/etc/odoo
       - ./addons:/mnt/extra-addons
     environment:
       - PASSWORD_FILE=/run/secrets/postgresql_password
+      - LOG_LEVEL=debug
     secrets:
       - postgresql_password
 
@@ -28,7 +29,7 @@ services:
       - "5432:5432"
     restart: always
     volumes:
-      - db-custom:/var/lib/postgresql/data/pgdata
+      - db-odoo:/var/lib/postgresql/data/pgdata
     secrets:
       - postgresql_password
   flask:
@@ -38,8 +39,8 @@ services:
       restart: always
 
 volumes:
-  web-custom:
-  db-custom:
+  web-odoo:
+  db-odoo:
 
 secrets:
   postgresql_password:
